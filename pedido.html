@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fala sim</title>
+    <style>
+      body {
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+      #question {
+        font-size: 1.2em;
+        text-align: center;
+        margin-bottom: 20px;
+        color: white;
+      }
+      button {
+			padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+		}
+		button:hover {
+			background-color: #ff0000; /* muda a cor do botão ao passar o mouse */
+			color: #ffffff; /* muda a cor do texto do botão ao passar o mouse */
+			transform: translateX(1px); /* move o botão 10px para a direita ao passar o mouse */
+		}
+		#sim {
+        background-color: #4CAF50;
+        color: white;
+      }
+      #nao {
+        background-color: #f44336;
+        color: white;
+		}
+      #confetti {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 9999;
+      }
+      .confetti-piece {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: #f1c40f;
+        transform: rotate(45deg);
+        pointer-events: none;
+        animation: confetti-fall 6s infinite;
+      }
+      @keyframes confetti-fall {
+        0% {
+          transform: rotate(45deg) translate(0, -100vh);
+        }
+        100% {
+          transform: rotate(45deg) translate(0, 100vh);
+        }
+      }
+      .confetti-piece:nth-child(1) {
+        background-color: #e67e22;
+      }
+      .confetti-piece:nth-child(2) {
+        background-color: #e74c3c;
+      }
+      .confetti-piece:nth-child(3) {
+        background-color: #3498db;
+      }
+      .confetti-piece:nth-child(4) {
+        background-color: #9b59b6;
+      }
+      .confetti-piece:nth-child(5) {
+        background-color: #2ecc71;
+      }
+      #confirmation {
+        display: none;
+        margin-top: 20px;
+        color: white;
+      }
+      #confirmation-buttons {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      #confirmation-message {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+  <div>
+    <div id="question">
+      Namora comigo?
+    </div>
+    <button id="sim" onclick="showConfetti()">Sim</button>
+    <button id="nao" onclick="moverNao()">Não</button>
+	</div>
+    <div id="confetti"></div>
+    <div id="confirmation">
+      <div id="confirmation-message">Você tem certeza? Não pode voltar atrás.</div>
+	
+      <div id="confirmation-buttons">
+	  </div>
+        <button id="sim" onclick="redirectToVideoSim()">Sim</button>
+        <button id="nao" onclick="redirectToVideoNao()">Não</button>
+	</div>
+      
+    
+    <script>
+      function showConfetti() {
+        const question = document.getElementById("question");
+        const yesButton = document.getElementById("sim");
+        const noButton = document.getElementById("nao");
+        const confettiContainer = document.getElementById("confetti");
+
+        question.style.display = "none";
+        yesButton.style.display = "none";
+        noButton.style.display = "none";
+
+        for (let i = 0; i < 100; i++) {
+          const confettiPiece = document.createElement("div");
+          confettiPiece.classList.add("confetti-piece");
+          confettiPiece.style.left = `${Math.random() * 100}%`;
+          confettiPiece.style.animationDelay = `${Math.random() * 6}s`;
+          confettiContainer.appendChild(confettiPiece);
+        }
+
+        setTimeout(function () {
+          const confirmation = document.getElementById("confirmation");
+          confirmation.style.display = "block";
+        }, 2000);
+      }
+
+      var nao = document.getElementById('nao');
+		nao.addEventListener('mouseover', function() {
+			nao.style.position = 'absolute'; 
+			nao.style.left = Math.random() * window.innerWidth + 'px';
+			nao.style.top = Math.random() * window.innerHeight + 'px'; 
+		});
+		function moverNao() {
+			var nao = document.getElementById("nao");
+			var left = Math.floor(Math.random() * 80) + 1;
+			var top = Math.floor(Math.random() * 80) + 1;
+			nao.style.left = left + "%";
+			nao.style.top = top + "%";
+			}
+
+      function redirectToVideoSim() {
+        window.location.href = "https://www.youtube.com/watch?v=9a-pTPrWOS8";
+      }
+	  function redirectToVideoNao() {
+        window.location.href = "https://www.youtube.com/watch?v=bUVy0GQSHvE";
+      }
+
+    </script>
+  </body>
+</html>
